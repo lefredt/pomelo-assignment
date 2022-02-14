@@ -1,0 +1,24 @@
+service: serverless-http-api-typescript
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  statisticsBase:
+    handler: handler.statisticsBase
+    events:
+      - httpApi:
+          path: /statistics
+          method: POST
+  statisticsMerchant:
+    handler: handler.statisticsMerchant
+    events:
+      - httpApi:
+          path: /statistics/{merchantType}
+          method: POST
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline

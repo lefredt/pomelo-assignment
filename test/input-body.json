@@ -1,0 +1,86 @@
+[
+    {
+        "transactionId": "abc001",
+        "orderId": "ord101",
+        "merchantId": "merc1",
+        "merchantType": "foodbev",
+        "value": 43.27
+    },
+    {
+        "transactionId": "abc002",
+        "orderId": "ord101",
+        "merchantId": "merc1",
+        "merchantType": "foodbev",
+        "value": -3.27
+    },
+    {
+        "transactionId": "abc003",
+        "orderId": "ord102",
+        "merchantId": "merc1",
+        "merchantType": "foodbev",
+        "value": 20.00
+    },
+    {
+        "transactionId": "abc004",
+        "orderId": "ord103",
+        "merchantId": "merc1",
+        "merchantType": "foodbev",
+        "value": 30.00
+    },
+    {
+        "transactionId": "abc005",
+        "orderId": "ord101",
+        "merchantId": "merc1",
+        "merchantType": "foodbev",
+        "value": -10.00
+    },
+    {
+        "transactionId": "gov001",
+        "orderId": "pur201",
+        "merchantId": "gv20",
+        "merchantType": "gov",
+        "value": 10.00
+    },
+    {
+        "transactionId": "gov002",
+        "orderId": "pur202",
+        "merchantId": "gv20",
+        "merchantType": "gov",
+        "value": 5.00
+    },
+    {
+        "transactionId": "gov003",
+        "orderId": "pur201",
+        "merchantId": "gv20",
+        "merchantType": "gov",
+        "value": -5.00
+    },
+    {
+        "transactionId": "xyz001",
+        "orderId": "fb0001",
+        "merchantId": "fb001",
+        "merchantType": "foodbev",
+        "value": 100.00
+    },
+    {
+        "transactionId": "xyz002",
+        "orderId": "fb0002",
+        "merchantId": "fb001",
+        "merchantType": "foodbev",
+        "value": 200.00
+    },
+    {
+        "transactionId": "xyz003",
+        "orderId": "fb0001",
+        "merchantId": "fb001",
+        "merchantType": "foodbev",
+        "value": -25.50
+    },
+    {
+        "transactionId": "xyz004",
+        "orderId": "fb0003",
+        "merchantId": "fb001",
+        "merchantType": "foodbev",
+        "value": 80.00
+    }
+]
