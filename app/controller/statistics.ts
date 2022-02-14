@@ -8,7 +8,7 @@ const jsonArrayStream = withParser();
 const asyncPipeline = promisify(pipeline);
 
 export async function arrayStreamTest(inputArrayString: string, merchantType?: string) {
-    const merchantSales: MerchantSales[] = [];
+    const merchantSales: Map<string, MerchantSales> = new Map();
     let numTransactions: number = 0;
 
     const readable = Readable.from(inputArrayString);
@@ -22,15 +22,16 @@ export async function arrayStreamTest(inputArrayString: string, merchantType?: s
         }
 
         if (matchMerchantType) {
-            const merchantIdx = merchantSales.findIndex((merchantRec) => merchantRec.isSameMerchant(data.value.merchantId));
-            if (merchantIdx < 0) {
+            const existingMerchantSale = merchantSales.get(data.value.merchantId);
+            if (existingMerchantSale) {
+                // Modify exisiting merchant in the array (merchantSales)
+                existingMerchantSale.addTransaction(data.value);
+                merchantSales.set(data.value.merchantId, existingMerchantSale)
+            } else {
                 // Add new merchant to the array (merchantSales)
                 const newMerchant = new MerchantSales(data.value.merchantId, data.value.merchantType);
                 newMerchant.addTransaction(data.value);
-                merchantSales.push(newMerchant);
-            } else {
-                // Modify exisiting merchant in the array (merchantSales)
-                merchantSales[merchantIdx].addTransaction(data.value);
+                merchantSales.set(data.value.merchantId, newMerchant)
             }
         }
     })
@@ -39,5 +40,6 @@ export async function arrayStreamTest(inputArrayString: string, merchantType?: s
         })
 
     await asyncPipeline(readable, jsonArrayStream);
-    return merchantSales.map((merchant) => merchant.calculateStatistics());
+    return Array.from(merchantSales.values()).map((merchant) => merchant.calculateStatistics());
+    // return merchantSales.map((merchant) => merchant.calculateStatistics());
 }

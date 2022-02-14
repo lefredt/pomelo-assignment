@@ -6,7 +6,7 @@ export class MerchantSales {
     salesSum: number;
     refundSum: number;
     numberOfSales: number;
-    orderIds: string[]
+    orderIds: Set<string>
 
     constructor(merchantId: string, merchantType: string) {
         this.id = merchantId;
@@ -14,7 +14,7 @@ export class MerchantSales {
         this.salesSum = 0;
         this.refundSum = 0;
         this.numberOfSales = 0;
-        this.orderIds = [];
+        this.orderIds = new Set();
     }
 
     isSameMerchant(merchantId: string): boolean {
@@ -23,8 +23,8 @@ export class MerchantSales {
 
     addTransaction(transaction: any): void {
         // add new orderIds
-        if (!this.orderIds.includes(transaction.orderId)) {
-            this.orderIds.push(transaction.orderId)
+        if (!this.orderIds.has(transaction.orderId)) {
+            this.orderIds.add(transaction.orderId);
         }
 
         // add to purchase sum or refund sum
@@ -41,7 +41,7 @@ export class MerchantSales {
             merchantId: this.id,
             grossSales: roundToTwoDecimal(this.salesSum),
             netSales: roundToTwoDecimal(netSales),
-            averageOrder: roundToTwoDecimal(netSales / this.orderIds.length)
+            averageOrder: roundToTwoDecimal(netSales / this.orderIds.size)
         }
     }
 }
